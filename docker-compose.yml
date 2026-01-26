@@ -1,0 +1,61 @@
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: tasks/docker/Dockerfile
+    container_name: envolutions_app
+    volumes:
+      - .:/app
+    working_dir: /app
+    depends_on:
+      - mysql
+    networks:
+      - default
+
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: envolutions_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - .:/app
+      - ./tasks/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - default
+
+  mysql:
+    image: mysql:8.4
+    container_name: envolutions_mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: envolutions
+      MYSQL_USER: app
+      MYSQL_PASSWORD: envolutions
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - default
+
+  node:
+    image: node:20-alpine
+    container_name: envolutions_node
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - "5173:5173"
+    networks:
+      - default
+
+networks:
+  default:
+
+volumes:
+  mysql_data:
+
