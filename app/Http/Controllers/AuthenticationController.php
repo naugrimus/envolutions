@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthenticateRequest;
+use App\Models\User;
 use App\Services\AuthenticationService;
 
 class AuthenticationController extends Controller
@@ -12,12 +13,19 @@ class AuthenticationController extends Controller
     }
 
     public function Authenticate(AuthenticateRequest $request) {
-        if(!$this->authenticationService->AuthenticateUser($request)) {
+        if(!$user = $this->authenticationService->AuthenticateUser($request)) {
             return back()->withErrors([
                 'email' => 'Credentials not found.',
             ])->onlyInput('email');
         }
 
-        return redirect()->route('dashboard');
+        return redirect()->route($this->redirectTo($user));
+    }
+
+    protected function redirectTo(User $user): string {
+        if($user->hasRole('agent')) {
+            return route('agent.dashboard');
+        }
+        return route('user.dashboard');
     }
 }
