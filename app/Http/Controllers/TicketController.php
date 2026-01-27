@@ -14,12 +14,25 @@ class TicketController
     public function index() {
 
         $tickets = $this->ticketRepository->all();
-        return view('dashboard.index',
+        return view('ticket.index',
         [
             'tickets' => $tickets
         ]);
     }
 
     public function show(Ticket $ticket) {
+        return view('ticket.details',
+        [
+            'ticket' => $ticket,
+            'replies' => $ticket->replies()
+        ]);
+    }
+
+    public function edit(Ticket $ticket) {
+        return view('ticket.details',
+            [
+                'ticket' => $ticket,
+                'replies' => $ticket->replies()->get()
+            ]);
     }
 }
