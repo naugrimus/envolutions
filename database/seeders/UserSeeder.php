@@ -13,6 +13,7 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name' => 'Agent User',
+            'organisation_id' => 1,
             'email' => 'agent@test.nl',
             'password' => Hash::make('test123'),
 
@@ -21,6 +22,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'name' => 'normal User',
+            'organisation_id' => 2,
             'email' => 'user1@test.nl',
             'password' => Hash::make('test123'),
 
@@ -29,6 +31,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'normal User',
             'email' => 'user2@test.nl',
+            'organisation_id' => 2,
             'password' => Hash::make('test123'),
 
         ])->assignRole('user');
