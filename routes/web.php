@@ -12,4 +12,7 @@ Route::post('/login', [AuthenticationController::class, 'authenticate'])
     ->name('login');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->name('dashboard');
+    ->name('user.dashboard');
+
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
+    ->name('admin.dashboard');
