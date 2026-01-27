@@ -21,6 +21,7 @@
 </head>
 <body>
 <main class="flex-fill">
+
     @if($errors)
         <ul>
     @foreach ($errors->all() as $error)

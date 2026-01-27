@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('ticket_id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->text('description');
+            $table->text('reply');
             $table->boolean('internal')->default(false);
             $table->timestamps();
         });

@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Scopes\DetectUserScope;
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Ticket extends Model
 {
+    use HasFactory;
 
     protected static function booted(): void
     {
@@ -20,4 +22,8 @@ class Ticket extends Model
         'description',
         'priority',
     ];
+
+    public function replies(): HasMany {
+        return $this->hasMany(Reply::class);
+    }
 }
