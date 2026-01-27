@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Roles;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -17,7 +18,7 @@ class UserSeeder extends Seeder
             'email' => 'agent@test.nl',
             'password' => Hash::make('test123'),
 
-        ])->assignRole('agent');
+        ])->assignRole(Roles::AGENT->value);
 
 
         User::create([
@@ -26,7 +27,7 @@ class UserSeeder extends Seeder
             'email' => 'user1@test.nl',
             'password' => Hash::make('test123'),
 
-        ])->assignRole('user');
+        ])->assignRole(Roles::USER->value);
 
         User::create([
             'name' => 'normal User',
@@ -34,7 +35,7 @@ class UserSeeder extends Seeder
             'organisation_id' => 2,
             'password' => Hash::make('test123'),
 
-        ])->assignRole('user');
+        ])->assignRole(Roles::USER->value);
 
 
     }

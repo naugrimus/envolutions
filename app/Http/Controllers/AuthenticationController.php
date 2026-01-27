@@ -19,13 +19,7 @@ class AuthenticationController extends Controller
             ])->onlyInput('email');
         }
 
-        return redirect()->route($this->redirectTo($user));
+        return redirect()->route('ticket.index');
     }
 
-    protected function redirectTo(User $user): string {
-        if($user->hasRole('agent')) {
-            return route('agent.dashboard');
-        }
-        return route('user.dashboard');
-    }
 }
