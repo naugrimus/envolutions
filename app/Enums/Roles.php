@@ -5,7 +5,7 @@ namespace App\Enums;
 enum Roles: string
 {
     case AGENT = 'AGENT';
-    case USER = 'USR';
+    case USER = 'USER';
 
     public function getLabel(): string
     {

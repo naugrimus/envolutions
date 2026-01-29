@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Status;
 use App\Models\Ticket;
 use App\Repositories\TicketRepository;
 
@@ -24,7 +25,9 @@ class TicketController
         return view('ticket.details',
         [
             'ticket' => $ticket,
-            'replies' => $ticket->replies()
+            'replies' => $ticket->replies(),
+            'statusses' => Status::values(),
+            'readonly' => true,
         ]);
     }
 
@@ -32,7 +35,9 @@ class TicketController
         return view('ticket.details',
             [
                 'ticket' => $ticket,
-                'replies' => $ticket->replies()->get()
+                'replies' => $ticket->replies()->get(),
+                'statusses' => Status::values(),
+                'readonly' => false,
             ]);
     }
 }
