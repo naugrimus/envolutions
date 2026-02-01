@@ -24,7 +24,8 @@ class Ticket extends Model
         'title',
         'description',
         'priority',
-        'sla'
+        'sla',
+        'assigned_user_id',
     ];
 
     public function replies(): HasMany {
