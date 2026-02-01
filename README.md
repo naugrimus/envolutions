@@ -26,6 +26,8 @@ php artisan db:seed
 ```
 - next you can goto localhost in you webbrowser and you will enter a login screen.
 
+login credentials are found in the userSeeder
+
 ## considerations
 
 - i could have used  livewire, vue or react. Although i know this i mainly use pure lavarel with blade.
