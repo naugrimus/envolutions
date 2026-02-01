@@ -13,8 +13,12 @@ i tried to keep the dockerfile as simple as possible.
 
 When pulled, normally it would be as simple as:
 - go to the directory in which the app is installed
+- copy .env.example to .env
+- change the DB settings to your mysql instance( or the docker instance)
+   if using the docker instance, maybe change them in docker-compose.yml and use these in your environment
 - then use the following:
 ```
+
 docker compose exec app /bin/bash
 composer install
 php artisan migrate
@@ -70,5 +74,6 @@ i just needed to test if the user had the right permission to view or edit every
 - create some user management
 - add some filters for overviews
 - maybe send mail when a ticket is created. Use a mailjob/queue for that
-
+- maybe more managament for the priority/ status and sla.
+- 
 
