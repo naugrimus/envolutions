@@ -1,59 +1,73 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+## About the project
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This is an assignnment for Envolutions. After review this will be deleted
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Installation
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+i developed it it docker
+for non-linux users, you need docker desktop
+for non-mac users, possibly there could be an error in de dockerfile, because of architectual issue.
+i tried to keep the dockerfile as simple as possible.
 
-## Learning Laravel
+When pulled, normally it would be as simple as:
+- go to the directory in which the app is installed
+- then use the following:
+```
+docker compose exec app /bin/bash
+php artisan migrate
+php artisan db:seed
+```
+- next you can goto localhost in you webbrowser and you will enter a login screen.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## considerations
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- i could have used  livewire, vue or react. Although i know this frameworks, i mainly use pure lavarevl with blade.
+- i thought about laravel breeze. I tried it, but i completely broke my css rendering. It would have taken sometime to fix that,
+while a simple own authentication works as well. Breeze would have got more functionality than requested.
+- About the replies, i was thinking about a parent child relation between replies. That would have created a bit more complexity
+- I strongly believe in SOLID. That's why i don't like business logic in controllers, but also don't really like savinf, fetching and creating models everywhere in the code.
+  That's why i created the DTO's and repositories. I think it also reflects in my views.
+- For the roles and permissions i tried to show what you can do with it. That's why i used spatie in combination of Policies.
+- You can completely fine grain the permissions of a user. And using scopes made sure i didn't have to check if a user woiuld be allowed to see some tickets, that's handle with the scope (through the database)
+- The SLA is decided through the priority. Right now, it is defined with hours that is set on the creation_date
+- instead of using a controller and an admin controller, i wanted to do everything in one controller/ setup
+- the use of Enums. Those could have been database tables. But then you need some gui management. There was no mention about that.
+  This works fast and is easily extendable.
 
-## Laravel Sponsors
+## amount of work
+I think i spend about 8:30 hours on the project. My development time was a bit scattered last week. Sometimes did 10 minutes,
+then half and hour. Because the busy schedule , i din't log the completely, but is definitely not more than 9 hours.
+Because of this, sometimes i had to backtrack some code. That's why it to took a bit longer than planned.
+Luckily i had planned about i would do in order.
+What i did was:
+- authentication
+- roles
+- crude views setup
+- fine grain roles and permissions for the views
+- add the sla
+- update the sla
+- testing
+- 
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+because of the way i used the roles and permissions, there is one view.
+i just needed to test if the user had the right permission to view or edit everything
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Next steps
+- i know some views are not clean enough.
+- the DTO's. I think there could be a better implementation. Right now ith works, and it is clean, but it feels a bit 'not development friendly enough'
+- the SLA. I think it is weird that when i change a ticket with a high priority to low, the sla will be extended.
+  something to discuss.
+- Have a better overview when a sla is overdue.
+- some views are missing some parts, like a reply overview missing a user and datetime from the reply
+- using a different field for the creation_date of a ticket, instead of the created_at.
+  Because the created_at is created by laravel, and done in the save method, i had no direct way to get that date.
+  I could extend or overwrite the timestamp method of eloquent, but that would also be out of scope.
+- use laravel pint !
+- create some user management
+- add some filters for overviews
+- maybe send mail when a ticket is created. Use a mailjob/queue for that
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
