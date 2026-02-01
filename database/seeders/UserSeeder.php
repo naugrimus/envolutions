@@ -18,8 +18,17 @@ class UserSeeder extends Seeder
             'email' => 'agent@test.nl',
             'password' => Hash::make('test123'),
 
-        ])->assignRole(Roles::AGENT->value);
+        ])->assignRole(Roles::AGENT->value)
+        ->givePermissionTo(['update ticket'])
+        ->givePermissionTo('assign user');
 
+        User::create([
+            'name' => 'Agent User 2',
+            'organisation_id' => 1,
+            'email' => 'agent2@test.nl',
+            'password' => Hash::make('test123'),
+
+        ])->assignRole(Roles::AGENT->value);
 
         User::create([
             'name' => 'normal User',

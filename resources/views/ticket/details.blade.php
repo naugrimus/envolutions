@@ -8,7 +8,7 @@
         <x-ticket.replies :replies="$replies" :readonly="$readonly"/>
 
         @if (!$readonly)
-            <x-ticket.form :ticket="$ticket"  />
+            <x-ticket.replyform :ticket="$ticket"  />
         @endif
 
 

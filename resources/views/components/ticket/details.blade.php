@@ -9,11 +9,8 @@
 
     <div class="px-6 py-4 space-y-4">
         <div class="flex flex-wrap gap-4">
-            <x-ticket.status :ticket="$ticket" :readonly="$readonly" />
+            <x-ticket.ticketform :ticket="$ticket" :readonly="$readonly" />
 
-            <span class="px-3 py-1 text-sm rounded-full bg-red-100 text-red-800">
-                Priority: {{ ucfirst($ticket->priority) }}
-            </span>
         </div>
 
         <div>
