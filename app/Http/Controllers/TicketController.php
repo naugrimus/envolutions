@@ -26,18 +26,14 @@ class TicketController extends Controller
 
     }
 
+
     public function update(UpdateTicketRequest $request, Ticket $ticket): RedirectResponse {
         $this->authorize('update ticket', $ticket);
-        $all=$request->validated();
-        if($all['user']) {
-            $all['assigned_user_id'] = $all['user'];
-        }
-        unset($all['user']);
-
-        $this->ticketRepository->update($all, $ticket);
+        $ticket = TicketDTO::update($request, $ticket);
+        $this->ticketRepository->update($ticket);
         return redirect()->route('ticket.index');
     }
-    
+
     public function create(): View {
         return view('ticket.create');
     }

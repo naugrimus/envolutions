@@ -31,8 +31,8 @@
             @enderror
         </div>
 
-        {{-- Internal reply (admins only) --}}
-        @if (auth()->user()?->role === 'admin')
+
+        @if (auth()->user()->hasRole(\App\Enums\Roles::AGENT))
             <div class="flex items-center gap-2">
                 <input
                     type="checkbox"
@@ -43,7 +43,7 @@
                            focus:ring-indigo-500"
                 >
                 <label for="internal" class="text-sm text-gray-700">
-                    Internal reply (visible to admins only)
+                    Internal
                 </label>
             </div>
         @endif

@@ -24,10 +24,11 @@ class TicketRepository implements RepositoryInterface
     }
 
 
-    public function update(array $data, Ticket $ticket): void {
 
-        $ticket->update($data);
+    public function update(Ticket $ticket): void {
+        $ticket->save();
     }
+
     public function all() : Collection {
         return Ticket::all();
     }

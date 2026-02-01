@@ -14,10 +14,9 @@ class DetectUserScope implements Scope
 
         $user = auth()->user();
         if(!$user->hasRole([Roles::AGENT->value])) {
-            $builder->where(
-                $model->getTable() . '.user_id',
-                $user->id
-            );
+            $builder
+            ->where($user->company_id = auth()->user()->company_id);
+
         }
     }
 

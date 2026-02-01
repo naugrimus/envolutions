@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\Priorities;
+use App\Enums\Roles;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +18,9 @@ class Ticket extends Model
     {
         static::addGlobalScope(new DetectUserScope());
     }
+
     protected $table = 'ticket';
+
     protected $fillable = [
         'user_id',
         'status',
@@ -28,8 +31,20 @@ class Ticket extends Model
         'assigned_user_id',
     ];
 
+         protected $casts = [
+            'sla' => 'datetime',
+             ];
+
     public function replies(): HasMany {
-        return $this->hasMany(Reply::class);
+        return $this->hasMany(Reply::class)->when(
+            !auth()->user()->hasRole(Roles::AGENT),
+                function ($q) {
+                    return $q->where('internal', false);
+                }
+
+        );
+
+
     }
 
     public function detectSLA(string $priority): Carbon {

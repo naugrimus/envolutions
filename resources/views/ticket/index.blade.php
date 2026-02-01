@@ -2,11 +2,18 @@
 
 @section('content')
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-
+        @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
         <div class="flex items-center justify-between mb-6">
             <h1 class="text-2xl font-semibold text-gray-900">
                 Support Tickets
             </h1>
+            <div  class="flex justify-end">
+                {{ auth()->getUser()->email}}
+            </div>
             <div class="flex justify-end">
                 <a href="ticket/create">
                         <button
@@ -31,6 +38,9 @@
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Priority</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">SLA</th>
+
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Created</th>
                     <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
                 </tr>
@@ -81,6 +91,11 @@
                                 {{ ucfirst(str_replace('_', ' ', $ticket->priority)) }}
                             </span>
                         </td>
+                        <td class="px-6 py-4 text-sm text-gray-500">
+
+                            {{ $ticket->sla?$ticket->sla->format('d M Y  H:m' ):'' }}
+                        </td>
+
                         <td class="px-6 py-4 text-sm text-gray-500">
                             {{ $ticket->created_at->format('d M Y') }}
                         </td>

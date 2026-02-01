@@ -2,11 +2,11 @@
 
 namespace App\DTO;
 
+use App\Http\Requests\UpdateTicketRequest;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Http\FormRequest;
-use Carbon\Carbon;
 
 class TicketDTO extends AbstractDTO
 {
@@ -29,6 +29,20 @@ class TicketDTO extends AbstractDTO
         return $ticket;
     }
 
+    public static function update(UpdateTicketRequest $webRequest, Ticket $ticket): Ticket {
+
+        if($webRequest->user) {
+            $ticket->assigned_user_id = $webRequest->user;
+        } else {
+            $ticket->assigned_user_id = null;
+        }
+
+       $ticket->sla = $ticket->detectSLA(strtoupper($webRequest->priority));
+       $ticket->priority = $webRequest->priority;
+
+        return $ticket;
+
+    }
     public function getTicket(): Ticket {
         return $this->ticket;
     }
