@@ -7,7 +7,20 @@
             <h1 class="text-2xl font-semibold text-gray-900">
                 Support Tickets
             </h1>
-
+            <div class="flex justify-end">
+                <a href="ticket/create">
+                        <button
+                            type="button"
+                            class="inline-flex items-center px-4 py-2
+                               bg-indigo-600 text-white text-sm font-medium
+                               rounded-md hover:bg-indigo-700
+                               focus:outline-none focus:ring-2
+                               focus:ring-indigo-500 focus:ring-offset-2"
+                        >
+                            Create Ticket
+                        </button>
+                </a>
+            </div>
 
         </div>
 
@@ -52,7 +65,22 @@
                                 {{ ucfirst(str_replace('_', ' ', $ticket->status)) }}
                             </span>
                         </td>
+                        <td class="px-6 py-4">
+                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full
+                                @if($ticket->priority === 'low')
+                                    bg-green-100 text-green-800
+                                @elseif($ticket->status === 'medium')
+                                    bg-yellow-100 text-yellow-800
+                                @elseif($ticket->status === 'high')
+                                    bg-gray-200 text-gray-800
+                                @else
+                                    bg-yellow-100 text-red-800
 
+                                @endif
+                            ">
+                                {{ ucfirst(str_replace('_', ' ', $ticket->priority)) }}
+                            </span>
+                        </td>
                         <td class="px-6 py-4 text-sm text-gray-500">
                             {{ $ticket->created_at->format('d M Y') }}
                         </td>
