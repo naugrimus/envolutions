@@ -16,6 +16,7 @@ When pulled, normally it would be as simple as:
 - then use the following:
 ```
 docker compose exec app /bin/bash
+composer install
 php artisan migrate
 php artisan db:seed
 ```
