@@ -2,11 +2,11 @@
 
 ## About the project
 
-This is an assignnment for Envolutions. After review this will be deleted
+This is an assignment for Envolutions. After review this will be deleted
 
 ## Installation
 
-i developed it it docker
+i developed it in docker
 for non-linux users, you need docker desktop
 for non-mac users, possibly there could be an error in de dockerfile, because of architectual issue.
 i tried to keep the dockerfile as simple as possible.
@@ -28,23 +28,23 @@ php artisan db:seed
 
 ## considerations
 
-- i could have used  livewire, vue or react. Although i know this frameworks, i mainly use pure lavarevl with blade.
+- i could have used  livewire, vue or react. Although i know this i mainly use pure lavarel with blade.
 - i thought about laravel breeze. I tried it, but i completely broke my css rendering. It would have taken sometime to fix that,
 while a simple own authentication works as well. Breeze would have got more functionality than requested.
 - About the replies, i was thinking about a parent child relation between replies. That would have created a bit more complexity
-- I strongly believe in SOLID. That's why i don't like business logic in controllers, but also don't really like savinf, fetching and creating models everywhere in the code.
+- I strongly believe in SOLID. That's why i don't like business logic in controllers, but also don't really like saving, fetching and creating models everywhere in the code.
   That's why i created the DTO's and repositories. I think it also reflects in my views.
 - For the roles and permissions i tried to show what you can do with it. That's why i used spatie in combination of Policies.
-- You can completely fine grain the permissions of a user. And using scopes made sure i didn't have to check if a user woiuld be allowed to see some tickets, that's handle with the scope (through the database)
+- You can completely fine grain the permissions of a user. And using scopes made sure i didn't have to check if a user would be allowed to see some tickets, that's handle with the scope (through the database)
 - The SLA is decided through the priority. Right now, it is defined with hours that is set on the creation_date
 - instead of using a controller and an admin controller, i wanted to do everything in one controller/ setup
-- the use of Enums. Those could have been database tables. But then you need some gui management. There was no mention about that.
+- the use of Enums. Those could have been database tables. But then you need some gui management. There was nothing mentioning that.
   This works fast and is easily extendable.
 
 ## amount of work
 I think i spend about 8:30 hours on the project. My development time was a bit scattered last week. Sometimes did 10 minutes,
-then half and hour. Because the busy schedule , i din't log the completely, but is definitely not more than 9 hours.
-Because of this, sometimes i had to backtrack some code. That's why it to took a bit longer than planned.
+then half and hour. Because the busy schedule , i didn't log the hours completely, but is definitely not more than 9 hours.
+Because of this, sometimes i had to backtrack some code. That's why it took a bit longer than planned.
 Luckily i had planned about i would do in order.
 What i did was:
 - authentication
@@ -74,6 +74,7 @@ i just needed to test if the user had the right permission to view or edit every
 - create some user management
 - add some filters for overviews
 - maybe send mail when a ticket is created. Use a mailjob/queue for that
-- maybe more managament for the priority/ status and sla.
-- 
+- maybe more management for the priority/ status and sla.
+- add a cron or a task-scheduling for overdue tickets
+
 
