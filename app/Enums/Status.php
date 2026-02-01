@@ -6,6 +6,8 @@ use function PHPSTORM_META\map;
 
 enum Status: string
 {
+    use TraitValues;
+
     case OPEN = 'OPEN';
 
     case CLOSED = 'CLOSED';
@@ -24,12 +26,6 @@ enum Status: string
         };
     }
 
-    public static function values(): array {
 
-        return collect(self::cases())
-            ->map(fn ($status) => $status->value)
-            ->toArray();
-
-    }
 
 }
